@@ -1,15 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
-	fmt.Println(RemoveFirstAndLast("Ansar"))
-	fmt.Println(RemoveFirstAndLast("An"))
+	arr := []any{9, "2", 10, "3"}
+	result := SumMix(arr)
+	fmt.Println(result)
 }
 
-func RemoveFirstAndLast(word string) string {
-	if len(word) <= 2 {
-		return ""
+func SumMix(arr []any) int {
+	sum := 0
+
+	for _, value := range arr {
+		switch v := value.(type) {
+		case int:
+			sum += v
+		case string:
+			num, err := strconv.Atoi(v)
+			if err == nil {
+				sum += num
+			}
+		}
 	}
-	return word[1 : len(word)-1]
+
+	return sum
 }
